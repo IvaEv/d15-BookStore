@@ -1,5 +1,10 @@
 ﻿using System.ComponentModel.Composition;
+using System.Data.Entity;
+using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Input;
+using BookStore.DataAccess;
+using BookStore.Models;
 using IkitMita;
 using IkitMita.Mvvm.ViewModels;
 
@@ -48,6 +53,7 @@ namespace BookStore.ViewModels
             }
         }
 
+        [DependsOn(nameof(IsFree))]
         [DependsOn(nameof(Login))]
         [DependsOn(nameof(Password))]
         public ICommand MakeLoginCommand
@@ -55,20 +61,31 @@ namespace BookStore.ViewModels
             get
             {
                 return _makeLoginCommand ??
-                       (_makeLoginCommand = new DelegateCommand(MakeLogin, 
-                       () => !Login.IsNullOrEmpty() && !Password.IsNullOrEmpty()));
+                       (_makeLoginCommand = new DelegateCommand(MakeLoginAsync,
+                       () => !Login.IsNullOrEmpty() && !Password.IsNullOrEmpty() && IsFree));
             }
         }
 
-        private void MakeLogin()
+        private async void MakeLoginAsync()
         {
-            if (Login == Password)
+            using (StartOperation())
+            using (var db = new BookStoreContext())
             {
-                Message = "Авторизация успешна";
-            }
-            else
-            {
-                Message = "Логин или пароль введены неправильно";
+                User user = await db.Users
+                    .Where(u => u.Login == Login)
+                    .Where(u => u.Password == Password)
+                    .FirstOrDefaultAsync();
+
+                await Task.Delay(2000);
+
+                if (user != null)
+                {
+                    Message = "Авторизация успешна";
+                }
+                else
+                {
+                    Message = "Логин или пароль введены неправильно";
+                }
             }
         }
     }
