@@ -1,15 +1,15 @@
-namespace BookStore.DataAccess.Migrations
+namespace BookStore.DataAccess.EF.Migrations
 {
     using System.Data.Entity.Migrations;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<BookStoreContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<BookStoreDbContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
         }
 
-        protected override void Seed(BookStoreContext context)
+        protected override void Seed(BookStoreDbContext context)
         {
             //  This method will be called after migrating to the latest version.
 

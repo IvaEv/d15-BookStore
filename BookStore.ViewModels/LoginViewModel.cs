@@ -1,10 +1,7 @@
 ﻿using System.ComponentModel.Composition;
-using System.Data.Entity;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using BookStore.DataAccess;
-using BookStore.Models;
 using IkitMita;
 using IkitMita.Mvvm.ViewModels;
 
@@ -22,6 +19,9 @@ namespace BookStore.ViewModels
         {
             Title = "Авторизация";
         }
+
+        [Import]
+        private IGetUserOperation GetUserOperation { get; set; }
 
         public string Login
         {
@@ -69,14 +69,8 @@ namespace BookStore.ViewModels
         private async void MakeLoginAsync()
         {
             using (StartOperation())
-            using (var db = new BookStoreContext())
             {
-                User user = await db.Users
-                    .Where(u => u.Login == Login)
-                    .Where(u => u.Password == Password)
-                    .FirstOrDefaultAsync();
-
-                await Task.Delay(2000);
+                var user = await GetUserOperation.ExecuteAsync(Login, Password);
 
                 if (user != null)
                 {

@@ -134,6 +134,18 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BookStore.DataAccess.EF\BookStore.DataAccess.EF.csproj">
+      <Project>{87dbab21-d5e9-46e0-83a6-9b2b30c81f31}</Project>
+      <Name>BookStore.DataAccess.EF</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BookStore.DataAccess\BookStore.DataAccess.csproj">
+      <Project>{d9659d88-aecf-4201-8a0d-9962710fb8b5}</Project>
+      <Name>BookStore.DataAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BookStore.Models\BookStore.Models.csproj">
+      <Project>{7c97ec61-6d36-4efb-8345-01f958eec28c}</Project>
+      <Name>BookStore.Models</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BookStore.ViewModels\BookStore.ViewModels.csproj">
       <Project>{495D5107-5B06-4297-B0C3-0A1FEAB53A86}</Project>
       <Name>BookStore.ViewModels</Name>

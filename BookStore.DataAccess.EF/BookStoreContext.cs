@@ -1,9 +1,9 @@
 ﻿using System.Data.Entity;
 using BookStore.Models;
 
-namespace BookStore.DataAccess
+namespace BookStore.DataAccess.EF
 {
-    public class BookStoreContext : DbContext
+    public class BookStoreDbContext : DbContext
     {
         public DbSet<User> Users { get; set; }
         public DbSet<Branch> Branches { get; set; }

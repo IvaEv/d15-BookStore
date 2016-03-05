@@ -1,4 +1,4 @@
-namespace BookStore.DataAccess.Migrations
+namespace BookStore.DataAccess.EF.Migrations
 {
     using System;
     using System.Data.Entity.Migrations;
