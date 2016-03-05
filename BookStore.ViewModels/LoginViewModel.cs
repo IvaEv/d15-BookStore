@@ -1,9 +1,9 @@
 ﻿using System.ComponentModel.Composition;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using BookStore.DataAccess;
 using IkitMita;
 using IkitMita.Mvvm.ViewModels;
+using Microsoft.Practices.ServiceLocation;
 
 namespace BookStore.ViewModels
 {
@@ -22,6 +22,9 @@ namespace BookStore.ViewModels
 
         [Import]
         private IGetUserOperation GetUserOperation { get; set; }
+
+        [Import]
+        private IServiceLocator ServiceLocator { get; set; }
 
         public string Login
         {
@@ -74,7 +77,10 @@ namespace BookStore.ViewModels
 
                 if (user != null)
                 {
-                    Message = "Авторизация успешна";
+                    var mainViewModel = ServiceLocator.GetInstance<MainViewModel>();
+                    mainViewModel.InitializeAsync(user);
+                    mainViewModel.Show();
+                    Close();
                 }
                 else
                 {

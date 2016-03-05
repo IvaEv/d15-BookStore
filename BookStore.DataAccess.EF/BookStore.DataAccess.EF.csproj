@@ -59,6 +59,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BookStoreContext.cs" />
+    <Compile Include="Operations\GetEmployeeOperation.cs" />
     <Compile Include="Operations\GetUserOperation.cs" />
     <Compile Include="Migrations\201602270408334_InitialModel.cs" />
     <Compile Include="Migrations\201602270408334_InitialModel.Designer.cs">
