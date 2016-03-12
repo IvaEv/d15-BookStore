@@ -4,15 +4,17 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{87DBAB21-D5E9-46E0-83A6-9B2B30C81F31}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{CD66A90E-2518-4140-B42E-03F5F8F56F8B}</ProjectGuid>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BookStore.DataAccess.EF</RootNamespace>
-    <AssemblyName>BookStore.DataAccess.EF</AssemblyName>
+    <RootNamespace>DbRecreation</RootNamespace>
+    <AssemblyName>DbRecreation</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -22,6 +24,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -46,8 +49,11 @@
       <HintPath>..\packages\JetBrains.Annotations.10.0.0\lib\net20\JetBrains.Annotations.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.8.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -58,36 +64,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BookStoreContext.cs" />
-    <Compile Include="Migrations\201603120521591_InitialModel.cs" />
-    <Compile Include="Migrations\201603120521591_InitialModel.Designer.cs">
-      <DependentUpon>201603120521591_InitialModel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Author.cs" />
-    <Compile Include="Models\Branch.cs" />
-    <Compile Include="Models\Client.cs" />
-    <Compile Include="Models\Employee.cs" />
-    <Compile Include="Models\Role.cs" />
-    <Compile Include="Models\User.cs" />
-    <Compile Include="Operations\GetEmployeeOperation.cs" />
-    <Compile Include="Operations\GetUserOperation.cs" />
-    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="JsonData\Employees.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BookStore.DataAccess\BookStore.DataAccess.csproj">
-      <Project>{D9659D88-AECF-4201-8A0D-9962710FB8B5}</Project>
-      <Name>BookStore.DataAccess</Name>
+    <ProjectReference Include="..\BookStore.BusinessLogic\BookStore.BusinessLogic.csproj">
+      <Project>{EF952C21-465F-46D5-A069-AB31C7A216E4}</Project>
+      <Name>BookStore.BusinessLogic</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201603120521591_InitialModel.resx">
-      <DependentUpon>201603120521591_InitialModel.cs</DependentUpon>
-    </EmbeddedResource>
+    <ProjectReference Include="..\BookStore.DataAccess.EF\BookStore.DataAccess.EF.csproj">
+      <Project>{87DBAB21-D5E9-46E0-83A6-9B2B30C81F31}</Project>
+      <Name>BookStore.DataAccess.EF</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

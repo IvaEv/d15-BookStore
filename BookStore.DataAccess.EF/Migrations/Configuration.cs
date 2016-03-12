@@ -2,7 +2,7 @@ namespace BookStore.DataAccess.EF.Migrations
 {
     using System.Data.Entity.Migrations;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<BookStoreDbContext>
+    public sealed class Configuration : DbMigrationsConfiguration<BookStoreDbContext>
     {
         public Configuration()
         {

@@ -8,12 +8,36 @@ namespace BookStore.DataAccess.EF.Migrations
         public override void Up()
         {
             CreateTable(
+                "dbo.Authors",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Birthday = c.DateTime(),
+                        FirstName = c.String(nullable: false),
+                        MiddleName = c.String(),
+                        LastName = c.String(),
+                    })
+                .PrimaryKey(t => t.Id);
+            
+            CreateTable(
                 "dbo.Branches",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
                         Address = c.String(),
                         Title = c.String(),
+                    })
+                .PrimaryKey(t => t.Id);
+            
+            CreateTable(
+                "dbo.Clients",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        RegistrationDate = c.DateTime(nullable: false),
+                        FirstName = c.String(nullable: false),
+                        MiddleName = c.String(),
+                        LastName = c.String(),
                     })
                 .PrimaryKey(t => t.Id);
             
@@ -57,7 +81,9 @@ namespace BookStore.DataAccess.EF.Migrations
             DropIndex("dbo.Employees", new[] { "BranchId" });
             DropTable("dbo.Users");
             DropTable("dbo.Employees");
+            DropTable("dbo.Clients");
             DropTable("dbo.Branches");
+            DropTable("dbo.Authors");
         }
     }
 }

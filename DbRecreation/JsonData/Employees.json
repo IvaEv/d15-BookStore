@@ -1,0 +1,13 @@
+﻿[
+  {
+    "FirstName": "Денис",
+    "LastName": "Завершиский",
+    "Birthday": "1990-06-01",
+    "HireDate": "2010-06-01",
+    "User": {
+      "Login": "zaverden",
+      "Password": "qwe123",
+      "Role": "Admin"
+    }
+  }
+]
