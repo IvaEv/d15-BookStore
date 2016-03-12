@@ -5,6 +5,6 @@ namespace BookStore.DataAccess
 {
     public interface IGetUserOperation
     {
-        Task<GetUserModel> ExecuteAsync(string login, string password);
+        Task<GetUserModel> ExecuteAsync(string login);
     }
 }

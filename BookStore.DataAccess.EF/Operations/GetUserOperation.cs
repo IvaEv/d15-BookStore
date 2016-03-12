@@ -10,13 +10,12 @@ namespace BookStore.DataAccess.EF.Operations
     [Export(typeof(IGetUserOperation))]
     public class GetUserOperation : IGetUserOperation
     {
-        public async Task<GetUserModel> ExecuteAsync(string login, string password)
+        public async Task<GetUserModel> ExecuteAsync(string login)
         {
             using (var db = new BookStoreDbContext())
             {
                 User user = await db.Users
                     .Where(u => u.Login == login)
-                    .Where(u => u.Password == password)
                     .FirstOrDefaultAsync();
 
                 return Convert(user);

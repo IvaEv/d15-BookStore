@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.Composition;
 using System.Windows.Input;
+using BookStore.BusinessLogic;
 using BookStore.DataAccess;
 using BookStore.DataAccess.Models;
 using IkitMita;
@@ -23,6 +24,9 @@ namespace BookStore.ViewModels
 
         [Import]
         private IGetUserOperation GetUserOperation { get; set; }
+
+        [Import]
+        private ISecurityManager SecurityManager { get; set; }
 
         [Import]
         private IServiceLocator ServiceLocator { get; set; }
@@ -74,18 +78,18 @@ namespace BookStore.ViewModels
         {
             using (StartOperation())
             {
-                GetUserModel user = await GetUserOperation.ExecuteAsync(Login, Password);
+                GetUserModel user = await GetUserOperation.ExecuteAsync(Login);
 
-                if (user != null)
+                if (user == null || !SecurityManager.AuthorizeUser(user, Password))
                 {
-                    var mainViewModel = ServiceLocator.GetInstance<MainViewModel>();
-                    mainViewModel.InitializeAsync(user);
-                    mainViewModel.Show();
-                    await Close();
+                    Message = "Логин или пароль введены неправильно";
                 }
                 else
                 {
-                    Message = "Логин или пароль введены неправильно";
+                    var mainViewModel = ServiceLocator.GetInstance<MainViewModel>();
+                    mainViewModel.InitializeAsync();
+                    mainViewModel.Show();
+                    await Close();
                 }
             }
         }

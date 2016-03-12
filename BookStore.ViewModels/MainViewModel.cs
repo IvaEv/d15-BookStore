@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.Composition;
+using BookStore.BusinessLogic;
 using BookStore.DataAccess;
 using BookStore.DataAccess.Models;
 using IkitMita.Mvvm.ViewModels;
@@ -23,11 +24,15 @@ namespace BookStore.ViewModels
         [Import]
         private IGetEmployeeOperation GetEmployeeOperation { get; set; }
 
-        public async void InitializeAsync(GetUserModel user)
+        [Import]
+        private ISecurityManager SecurityManager { get; set; }
+
+
+        public async void InitializeAsync()
         {
             using (StartOperation())
             {
-                CurrentEmployee = await GetEmployeeOperation.ExecuteAsync(user.Id);
+                CurrentEmployee = await GetEmployeeOperation.ExecuteAsync(SecurityManager.GetCurrentUser().Id);
             }
         }
     }
