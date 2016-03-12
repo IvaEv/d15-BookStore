@@ -70,10 +70,6 @@
       <Project>{D9659D88-AECF-4201-8A0D-9962710FB8B5}</Project>
       <Name>BookStore.DataAccess</Name>
     </ProjectReference>
-    <ProjectReference Include="..\BookStore.Models\BookStore.Models.csproj">
-      <Project>{7c97ec61-6d36-4efb-8345-01f958eec28c}</Project>
-      <Name>BookStore.Models</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

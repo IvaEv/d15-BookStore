@@ -2,14 +2,15 @@
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
-using BookStore.Models;
+using BookStore.DataAccess.EF.Models;
+using BookStore.DataAccess.Models;
 
 namespace BookStore.DataAccess.EF.Operations
 {
     [Export(typeof(IGetUserOperation))]
     public class GetUserOperation : IGetUserOperation
     {
-        public async Task<User> ExecuteAsync(string login, string password)
+        public async Task<GetUserModel> ExecuteAsync(string login, string password)
         {
             using (var db = new BookStoreDbContext())
             {
@@ -18,8 +19,20 @@ namespace BookStore.DataAccess.EF.Operations
                     .Where(u => u.Password == password)
                     .FirstOrDefaultAsync();
 
-                return user;
+                return Convert(user);
             }
+        }
+
+        private GetUserModel Convert(User user)
+        {
+            return user == null
+                ? null 
+                : new GetUserModel
+                    {
+                        Id = user.Id,
+                        Login = user.Login,
+                        Password = user.Password
+                    };
         }
     }
 }

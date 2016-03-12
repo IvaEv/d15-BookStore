@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.Composition;
 using BookStore.DataAccess;
-using BookStore.Models;
+using BookStore.DataAccess.Models;
 using IkitMita.Mvvm.ViewModels;
 
 namespace BookStore.ViewModels
@@ -8,9 +8,9 @@ namespace BookStore.ViewModels
     [Export]
     public class MainViewModel : ChildViewModelBase
     {
-        private Employee _currentEmployee;
+        private GetEmployeeModel _currentEmployee;
 
-        public Employee CurrentEmployee
+        public GetEmployeeModel CurrentEmployee
         {
             get { return _currentEmployee; }
             set
@@ -23,7 +23,7 @@ namespace BookStore.ViewModels
         [Import]
         private IGetEmployeeOperation GetEmployeeOperation { get; set; }
 
-        public async void InitializeAsync(User user)
+        public async void InitializeAsync(GetUserModel user)
         {
             using (StartOperation())
             {

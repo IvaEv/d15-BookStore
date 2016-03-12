@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.Composition;
 using System.Windows.Input;
 using BookStore.DataAccess;
+using BookStore.DataAccess.Models;
 using IkitMita;
 using IkitMita.Mvvm.ViewModels;
 using Microsoft.Practices.ServiceLocation;
@@ -73,14 +74,14 @@ namespace BookStore.ViewModels
         {
             using (StartOperation())
             {
-                var user = await GetUserOperation.ExecuteAsync(Login, Password);
+                GetUserModel user = await GetUserOperation.ExecuteAsync(Login, Password);
 
                 if (user != null)
                 {
                     var mainViewModel = ServiceLocator.GetInstance<MainViewModel>();
                     mainViewModel.InitializeAsync(user);
                     mainViewModel.Show();
-                    Close();
+                    await Close();
                 }
                 else
                 {

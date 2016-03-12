@@ -59,6 +59,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BookStoreContext.cs" />
+    <Compile Include="Models\Author.cs" />
+    <Compile Include="Models\Branch.cs" />
+    <Compile Include="Models\Client.cs" />
+    <Compile Include="Models\Employee.cs" />
+    <Compile Include="Models\Role.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="Operations\GetEmployeeOperation.cs" />
     <Compile Include="Operations\GetUserOperation.cs" />
     <Compile Include="Migrations\201602270408334_InitialModel.cs" />
@@ -88,10 +94,6 @@
     <ProjectReference Include="..\BookStore.DataAccess\BookStore.DataAccess.csproj">
       <Project>{D9659D88-AECF-4201-8A0D-9962710FB8B5}</Project>
       <Name>BookStore.DataAccess</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\BookStore.Models\BookStore.Models.csproj">
-      <Project>{7C97EC61-6D36-4EFB-8345-01F958EEC28C}</Project>
-      <Name>BookStore.Models</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

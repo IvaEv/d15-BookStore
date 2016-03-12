@@ -1,11 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookStore", "BookStore\BookStore.csproj", "{6FBC4C48-F3F1-478C-ACFD-8FC70A951468}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookStore.Models", "BookStore.Models\BookStore.Models.csproj", "{7C97EC61-6D36-4EFB-8345-01F958EEC28C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookStore.DataAccess", "BookStore.DataAccess\BookStore.DataAccess.csproj", "{D9659D88-AECF-4201-8A0D-9962710FB8B5}"
 EndProject
@@ -23,10 +21,6 @@ Global
 		{6FBC4C48-F3F1-478C-ACFD-8FC70A951468}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6FBC4C48-F3F1-478C-ACFD-8FC70A951468}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6FBC4C48-F3F1-478C-ACFD-8FC70A951468}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7C97EC61-6D36-4EFB-8345-01F958EEC28C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7C97EC61-6D36-4EFB-8345-01F958EEC28C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7C97EC61-6D36-4EFB-8345-01F958EEC28C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7C97EC61-6D36-4EFB-8345-01F958EEC28C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D9659D88-AECF-4201-8A0D-9962710FB8B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D9659D88-AECF-4201-8A0D-9962710FB8B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D9659D88-AECF-4201-8A0D-9962710FB8B5}.Release|Any CPU.ActiveCfg = Release|Any CPU

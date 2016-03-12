@@ -51,17 +51,14 @@
   <ItemGroup>
     <Compile Include="IGetEmployeeOperation.cs" />
     <Compile Include="IGetUserOperation.cs" />
+    <Compile Include="Models\Employee.cs" />
+    <Compile Include="Models\GetUserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\BookStore.Models\BookStore.Models.csproj">
-      <Project>{7C97EC61-6D36-4EFB-8345-01F958EEC28C}</Project>
-      <Name>BookStore.Models</Name>
-    </ProjectReference>
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

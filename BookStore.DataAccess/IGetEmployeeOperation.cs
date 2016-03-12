@@ -1,10 +1,10 @@
 ﻿using System.Threading.Tasks;
-using BookStore.Models;
+using BookStore.DataAccess.Models;
 
 namespace BookStore.DataAccess
 {
     public interface IGetEmployeeOperation
     {
-        Task<Employee> ExecuteAsync(int id);
+        Task<GetEmployeeModel> ExecuteAsync(int id);
     }
 }

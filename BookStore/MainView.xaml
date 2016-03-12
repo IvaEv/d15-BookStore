@@ -14,10 +14,8 @@
         <TextBlock Text="Полное имя" />
         <TextBlock Text="{Binding CurrentEmployee.FullName}" />
         <TextBlock Text="Подразделение" />
-        <TextBlock Text="{Binding CurrentEmployee.Branch.Title}" />
-        <TextBlock Text="Адрес" />
-        <TextBlock Text="{Binding CurrentEmployee.Branch.Address}" />
+        <TextBlock Text="{Binding CurrentEmployee.BranchTitle}" />
         <TextBlock Text="Дата приема на работу" />
-        <TextBlock Text="{Binding CurrentEmployee.HireDate, StringFormat={}{0:dd.MMMM.yyyy}}" />
+        <TextBlock Text="{Binding CurrentEmployee.HireDate, StringFormat={}{0:dd MMMM yyyy}}" />
     </StackPanel>
 </UserControl>

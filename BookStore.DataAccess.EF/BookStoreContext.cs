@@ -1,5 +1,5 @@
 ﻿using System.Data.Entity;
-using BookStore.Models;
+using BookStore.DataAccess.EF.Models;
 
 namespace BookStore.DataAccess.EF
 {

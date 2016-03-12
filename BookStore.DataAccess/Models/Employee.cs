@@ -1,9 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using IkitMita.DataAccess;
 
-namespace BookStore.DataAccess.EF.Models
+namespace BookStore.DataAccess.Models
 {
-    public class Employee : FullNamedDomainObject
+    public class GetEmployeeModel : FullNamedDomainObject
     {
         public DateTime Birthday { get; set; }
 
@@ -13,8 +16,6 @@ namespace BookStore.DataAccess.EF.Models
 
         public int BranchId { get; set; }
 
-        public Branch Branch { get; set; }
-
-        public User User { get; set; }
+        public string BranchTitle { get; set; }
     }
 }
