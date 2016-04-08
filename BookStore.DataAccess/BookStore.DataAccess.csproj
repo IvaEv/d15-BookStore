@@ -51,8 +51,10 @@
   <ItemGroup>
     <Compile Include="IGetEmployeeOperation.cs" />
     <Compile Include="IGetUserOperation.cs" />
+    <Compile Include="ISearchBooksOperation.cs" />
     <Compile Include="Models\Employee.cs" />
     <Compile Include="Models\GetUserModel.cs" />
+    <Compile Include="Models\SearchBookModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
