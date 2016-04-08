@@ -7,10 +7,14 @@
     xmlns:viewModels="clr-namespace:BookStore.ViewModels;assembly=BookStore.ViewModels"
     xmlns:converters="clr-namespace:IkitMita.Wpf.Converters;assembly=IkitMita.Wpf"
     xmlns:wpf="clr-namespace:IkitMita.Wpf;assembly=IkitMita.Wpf"
+    xmlns:views="clr-namespace:IkitMita.Mvvm.Views;assembly=IkitMita.Mvvm.Views"
     mc:Ignorable="d" 
     d:DesignHeight="300" d:DesignWidth="300"
     d:DataContext="{d:DesignInstance viewModels:MainViewModel}"
     
+    views:ChildViewPresenter.ViewMinHeight="480"
+    views:ChildViewPresenter.ViewMinWidth="640"
+    IsEnabled="{Binding IsFree}"
     >
     <UserControl.Resources>
         <converters:BooleanConverter x:Key="BoolToVisibilityConverter"
@@ -43,6 +47,43 @@
         </StackPanel>
         
         <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            
+            <TextBox Grid.Row="0" Grid.Column="0"
+                     Text="{Binding SearchString, UpdateSourceTrigger=PropertyChanged}"
+                     />
+            
+            <Button Grid.Row="0" Grid.Column="1"
+                    Content="Найти"
+                    Command="{Binding SearchBooksCommand}"
+                    IsDefault="True"
+                    />
+            
+            <DataGrid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
+                      ItemsSource="{Binding FoundBooks}"
+                      AutoGenerateColumns="False"
+                      IsReadOnly="True"
+                      >
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding BookTitle}"
+                                        Header="Название" />
+                    <DataGridTextColumn Binding="{Binding Isbn}"
+                                        Header="ISBN" />
+                    <DataGridTextColumn Binding="{Binding Authors}"
+                                        Header="Авторы" />
+                    <DataGridTextColumn Binding="{Binding Price}"
+                                        Header="Цена" />
+                    <DataGridTextColumn Binding="{Binding Amount}"
+                                        Header="Количество" />
+                </DataGrid.Columns>
+            </DataGrid>
             
         </Grid>
     </DockPanel>
