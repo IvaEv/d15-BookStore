@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data.Entity;
+using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using BookStore.BusinessLogic;
 using BookStore.DataAccess.EF;
-using BookStore.DataAccess.EF.Migrations;
 using BookStore.DataAccess.EF.Models;
 using Newtonsoft.Json;
+using Configuration = BookStore.DataAccess.EF.Migrations.Configuration;
 
 namespace DbRecreation
 {
@@ -17,6 +17,21 @@ namespace DbRecreation
     {
         static void Main(string[] args)
         {
+            var contextName = typeof(BookStoreDbContext).Name;
+
+            if (Database.Exists(contextName))
+            {
+                var connectionString = ConfigurationManager.ConnectionStrings[contextName].ConnectionString;
+                using (var connection = new SqlConnection(connectionString))
+                using (var command = connection.CreateCommand())
+                {
+                    connection.Open();
+                    command.CommandText = $"ALTER DATABASE [{connection.Database}] SET SINGLE_USER WITH ROLLBACK IMMEDIATE";
+                    command.ExecuteNonQuery();
+                }
+
+                Database.Delete(contextName);
+            }
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<BookStoreDbContext, Configuration>());
 
             using (var db = new BookStoreDbContext())
