@@ -5,17 +5,45 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
     xmlns:viewModels="clr-namespace:BookStore.ViewModels;assembly=BookStore.ViewModels"
+    xmlns:converters="clr-namespace:IkitMita.Wpf.Converters;assembly=IkitMita.Wpf"
+    xmlns:wpf="clr-namespace:IkitMita.Wpf;assembly=IkitMita.Wpf"
     mc:Ignorable="d" 
     d:DesignHeight="300" d:DesignWidth="300"
     d:DataContext="{d:DesignInstance viewModels:MainViewModel}"
     
     >
-    <StackPanel>
-        <TextBlock Text="Полное имя" />
-        <TextBlock Text="{Binding CurrentEmployee.FullName}" />
-        <TextBlock Text="Подразделение" />
-        <TextBlock Text="{Binding CurrentEmployee.BranchTitle}" />
-        <TextBlock Text="Дата приема на работу" />
-        <TextBlock Text="{Binding CurrentEmployee.HireDate, StringFormat={}{0:dd MMMM yyyy}}" />
-    </StackPanel>
+    <UserControl.Resources>
+        <converters:BooleanConverter x:Key="BoolToVisibilityConverter"
+                                     OnFalse="{wpf:Visibility Collapsed}"
+                                     OnTrue="{wpf:Visibility Visible}" />
+    </UserControl.Resources>
+    <DockPanel LastChildFill="True">
+        <Menu DockPanel.Dock="Top">
+            
+        </Menu>
+        
+        <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal">
+            <StackPanel.Resources>
+                <Style TargetType="TextBlock" x:Key="Separator" 
+                       BasedOn="{StaticResource {x:Type TextBlock}}">
+                    <Setter Property="Text" Value="|" />
+                    <Setter Property="VerticalAlignment" Value="Center" />
+                    <Setter Property="Padding" Value="5 0" />
+                </Style>
+            </StackPanel.Resources>
+            
+            <TextBlock Text="{Binding CurrentEmployee.ShortName}" />
+            <TextBlock Style="{StaticResource Separator}" />
+            <TextBlock Text="{Binding CurrentEmployee.BranchTitle}" />
+            <TextBlock Style="{StaticResource Separator}" />
+            <TextBlock Text="Осуществляется поиск"
+                       Visibility="{Binding IsBusy, Converter={StaticResource BoolToVisibilityConverter}}" />
+            <TextBlock Text="{Binding FoundBooks.Count, StringFormat={}Найдено {0} книг}"
+                       Visibility="{Binding IsFree, Converter={StaticResource BoolToVisibilityConverter}}" />
+        </StackPanel>
+        
+        <Grid>
+            
+        </Grid>
+    </DockPanel>
 </UserControl>

@@ -28,7 +28,7 @@ namespace BookStore.ViewModels
 
         public ICollection<SearchBookModel> FoundBooks
         {
-            get { return _foundBooks; }
+            get { return _foundBooks ?? (_foundBooks = new List<SearchBookModel>()); }
             set
             {
                 _foundBooks = value;
