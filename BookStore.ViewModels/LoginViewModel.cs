@@ -20,6 +20,11 @@ namespace BookStore.ViewModels
         public LoginViewModel()
         {
             Title = "Авторизация";
+
+#if DEBUG
+            Login = "zaverden";
+            Password = "qwe123";
+#endif
         }
 
         [Import]

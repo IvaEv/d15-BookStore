@@ -63,10 +63,18 @@
     <Compile Include="Migrations\201603120521591_InitialModel.Designer.cs">
       <DependentUpon>201603120521591_InitialModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201604080934227_CompleteModel.cs" />
+    <Compile Include="Migrations\201604080934227_CompleteModel.Designer.cs">
+      <DependentUpon>201604080934227_CompleteModel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\Author.cs" />
+    <Compile Include="Models\Book.cs" />
+    <Compile Include="Models\BookAmount.cs" />
     <Compile Include="Models\Branch.cs" />
     <Compile Include="Models\Client.cs" />
     <Compile Include="Models\Employee.cs" />
+    <Compile Include="Models\Order.cs" />
+    <Compile Include="Models\OrderedBook.cs" />
     <Compile Include="Models\Role.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Operations\GetEmployeeOperation.cs" />
@@ -87,6 +95,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201603120521591_InitialModel.resx">
       <DependentUpon>201603120521591_InitialModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201604080934227_CompleteModel.resx">
+      <DependentUpon>201604080934227_CompleteModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

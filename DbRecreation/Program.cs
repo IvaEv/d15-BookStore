@@ -38,6 +38,7 @@ namespace DbRecreation
             {
                 CreateBranches(db);
                 CreateEmployees(db);
+                CreateItems<Client>(db, "JsonData/Сlients.json");
 
                 db.SaveChanges();
             }
@@ -69,6 +70,14 @@ namespace DbRecreation
             var index = _rand.Next(0, collection.Count);
             var item = collection.ElementAt(index);
             return item;
+        }
+
+        private static List<T> CreateItems<T>(BookStoreDbContext db, string filePath) where T : class
+        {
+            var jsonData = File.ReadAllText(filePath);
+            var items = JsonConvert.DeserializeObject<List<T>>(jsonData);
+            db.Set<T>().AddRange(items);
+            return items;
         }
     }
 }
