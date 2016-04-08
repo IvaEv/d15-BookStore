@@ -39,6 +39,7 @@ namespace DbRecreation
                 CreateBranches(db);
                 CreateEmployees(db);
                 CreateItems<Client>(db, "JsonData/Сlients.json");
+                CreateBooksAndAuthors(db);
 
                 db.SaveChanges();
             }
@@ -62,6 +63,35 @@ namespace DbRecreation
                 employee.Branch = GetRandomItem(db.Branches.Local);
                 db.Employees.Add(employee);
             }
+        }
+
+        static void CreateBooksAndAuthors(BookStoreDbContext db)
+        {
+            db.BookAmounts.Add(new BookAmount
+            {
+                Amount = 10,
+                Branch = db.Employees.Local.First().Branch,
+                Book = new Book
+                {
+                    Isbn = "13-123456-12",
+                    Price = 125,
+                    PublishYear = 2015,
+                    Title = "CLR via C#",
+                    Authors = new List<Author>
+                    {
+                        new Author
+                        {
+                            LastName = "Richter",
+                            FirstName = "Jeffrey"
+                        },
+                        new Author
+                        {
+                            LastName = "Richter1",
+                            FirstName = "Jeffrey1"
+                        },
+                    }
+                }
+            });
         }
 
         private static readonly Random _rand = new Random();
