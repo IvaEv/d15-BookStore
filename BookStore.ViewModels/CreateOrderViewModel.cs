@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.Composition;
-using System.Security;
 using BookStore.BusinessLogic;
 using BookStore.DataAccess;
 using BookStore.DataAccess.Models;
@@ -10,6 +9,7 @@ using IkitMita.Mvvm.ViewModels;
 namespace BookStore.ViewModels
 {
     [Export]
+    [PartCreationPolicy(CreationPolicy.NonShared)]
     public class CreateOrderViewModel: ChildViewModelBase
     {
         private GetEmployeeModel _currentEmployee;

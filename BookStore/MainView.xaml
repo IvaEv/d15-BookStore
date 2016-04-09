@@ -24,7 +24,7 @@
     </UserControl.Resources>
     <DockPanel LastChildFill="True">
         <Menu DockPanel.Dock="Top">
-            
+            <MenuItem Header="Создать заказ" Command="{Binding CreateOrderCommand}"/>
         </Menu>
         
         <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal">
