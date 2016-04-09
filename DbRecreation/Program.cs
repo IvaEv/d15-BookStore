@@ -39,7 +39,9 @@ namespace DbRecreation
                 CreateBranches(db);
                 CreateEmployees(db);
                 CreateItems<Client>(db, "JsonData/Сlients.json");
-                CreateBooksAndAuthors(db);
+                CreateItems<Author>(db, "JsonData/Authors.json");
+                CreateBooks(db);
+                //CreateBooksAndAuthors(db);
 
                 db.SaveChanges();
             }
@@ -100,6 +102,38 @@ namespace DbRecreation
             var index = _rand.Next(0, collection.Count);
             var item = collection.ElementAt(index);
             return item;
+        }
+
+        private static void CreateBooks(BookStoreDbContext db)
+        {
+            var books = CreateItems<Book>(db, "jsondata/Book.json");
+            foreach (var book in books)
+            {
+                book.Isbn = $"{_rand.Next(10, 100)}-{_rand.Next(10000, 100000)}-{_rand.Next(100, 1000)}";
+                book.Price = _rand.Next(100, 5000);
+                book.PublishYear = _rand.Next(1990, 2016);
+                book.Authors = new List<Author>();
+                var authorsCount = _rand.Next(1, 4);
+                for (int i = 0; i < authorsCount; i++)
+                {
+                    book.Authors.Add(GetRandomItem(db.Authors.Local));
+                }
+
+                foreach (var branch in db.Branches.Local)
+                {
+                    if (_rand.Next()%10 == 0)
+                    {
+                        continue;
+                    }
+
+                    db.BookAmounts.Add(new BookAmount
+                    {
+                        Book = book,
+                        Branch = branch,
+                        Amount = _rand.Next(5, 50)
+                    });
+                }
+            }
         }
 
         private static List<T> CreateItems<T>(BookStoreDbContext db, string filePath) where T : class

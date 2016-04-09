@@ -70,6 +70,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="JsonData\Authors.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="JsonData\Book.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="JsonData\Employees.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
