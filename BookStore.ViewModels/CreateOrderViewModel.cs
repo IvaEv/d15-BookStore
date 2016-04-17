@@ -1,10 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.Composition;
 using System.Linq;
 using BookStore.BusinessLogic;
 using BookStore.DataAccess;
 using BookStore.DataAccess.Models;
+using IkitMita;
 using IkitMita.Mvvm.ViewModels;
 
 namespace BookStore.ViewModels
@@ -20,6 +22,8 @@ namespace BookStore.ViewModels
         private ObservableCollection<SaveOrderedBookModel> _orderedBooks;
         private DelegateCommand<SearchBookModel> _selectBookCommand;
         private DelegateCommand<SaveOrderedBookModel> _unselectBookCommand;
+        private DelegateCommand _saveOrderCommand;
+        private string _errorMessage;
 
         public CreateOrderViewModel()
         {
@@ -58,6 +62,16 @@ namespace BookStore.ViewModels
             }
         }
 
+        public string ErrorMessage
+        {
+            get { return _errorMessage; }
+            set
+            {
+                _errorMessage = value; 
+                OnPropertyChanged();
+            }
+        }
+
         public async void InitializeAsync()
         {
             using (StartOperation())
@@ -77,6 +91,39 @@ namespace BookStore.ViewModels
         public DelegateCommand<SaveOrderedBookModel> UnselectBookCommand
             => _unselectBookCommand 
             ?? (_unselectBookCommand = new DelegateCommand<SaveOrderedBookModel>(bm => OrderedBooks.Remove(bm)));
+
+        public DelegateCommand SaveOrderCommand => _saveOrderCommand
+            ?? (_saveOrderCommand = new DelegateCommand(SaveOrderAsync));
+
+        private async void SaveOrderAsync()
+        {
+            if (SelectedClient == null)
+            {
+                ErrorMessage = "Не выбран клиент.";
+                return;
+            }
+
+            if (OrderedBooks.IsNullOrEmpty())
+            {
+                ErrorMessage = "Необходимо добавить хотя бы 1 книгу.";
+                return;
+            }
+
+            using (StartOperation())
+            {
+                var saveOrderModel = new SaveOrderModel
+                {
+                    OrderedBooks = OrderedBooks,
+                    BranchId = _currentEmployee.BranchId,
+                    ClientId = SelectedClient.Id,
+                    EmployeeId = _currentEmployee.Id,
+                    OrderDate = DateTime.Now
+                };
+
+                await SaveOrderOperation.ExecuteAsync(saveOrderModel);
+                await Close(true);
+            }
+        }
 
         private void SelectBook(SearchBookModel bookModel)
         {
@@ -108,12 +155,19 @@ namespace BookStore.ViewModels
 
         [Import]
         private IGetClientOperation GetClientOperation { get; set; }
+
         [Import]
         private ISearchBooksOperation SearchBoksOperation { get; set; }
+
         [Import]
         private ISecurityManager SecurityManager { get; set; }
+
         [Import]
         private IGetEmployeeOperation GetEmployeeOperation { get; set; }
+
+        [Import]
+        private ISaveOrderOperation SaveOrderOperation { get; set; }
+
 
     }
 

@@ -60,7 +60,13 @@ namespace BookStore.ViewModels
             vm.InitializeAsync();
             vm.Parent = this;
             vm.Show();
-            var modalRezult = await vm;
+
+            bool modalResult = await vm;
+
+            if (modalResult)
+            {
+                SearchBooksAsync();
+            }
         }
 
         private async void SearchBooksAsync()

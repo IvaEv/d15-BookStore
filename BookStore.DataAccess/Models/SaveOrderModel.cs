@@ -5,7 +5,7 @@ using IkitMita;
 
 namespace BookStore.DataAccess.Models
 {
-    public class SaveOrderedModel
+    public class SaveOrderModel
     {
         public int EmployeeId { get; set; }
         public int BranchId { get; set; }
@@ -20,7 +20,7 @@ namespace BookStore.DataAccess.Models
                     return 0;
                 }
 
-                var total = OrderedBooks.Sum(ob => ob.Amount*ob.Price);
+                var total = OrderedBooks.Sum(ob => ob.TotalCost);
                 return total;
             }
         }

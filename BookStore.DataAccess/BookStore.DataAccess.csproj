@@ -58,7 +58,7 @@
     <Compile Include="Models\GetClientModel.cs" />
     <Compile Include="Models\GetUserModel.cs" />
     <Compile Include="Models\SaveOrderedBookModel.cs" />
-    <Compile Include="Models\SaveOrderedModel.cs" />
+    <Compile Include="Models\SaveOrderModel.cs" />
     <Compile Include="Models\SearchBookModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

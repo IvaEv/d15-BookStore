@@ -5,6 +5,6 @@ namespace BookStore.DataAccess
 {
     public interface ISaveOrderOperation
     {
-        Task<bool> ExecuteAsync(SaveOrderedModel model);
+        Task<bool> ExecuteAsync(SaveOrderModel model);
     }
 }

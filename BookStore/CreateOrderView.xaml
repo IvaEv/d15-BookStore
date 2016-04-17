@@ -25,9 +25,21 @@
                           />
             </wpf:LabeledControl>
         </StackPanel>
-        <StackPanel DockPanel.Dock="Bottom">
-            <!--Доп информация о заказе-->
-        </StackPanel>
+        
+        <Grid DockPanel.Dock="Bottom">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            
+            <TextBlock Grid.Column="0"
+                       Text="{Binding ErrorMessage}"
+                       Foreground="Red" />
+            
+            <Button Grid.Column="1"
+                    Content="Сохранить заказ"
+                    Command="{Binding SaveOrderCommand}" />
+        </Grid>
 
         <Grid>
             <Grid.RowDefinitions>
