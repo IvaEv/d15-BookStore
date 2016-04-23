@@ -12,6 +12,7 @@ namespace BookStore.WebService
     {
         public void Configuration(IAppBuilder app)
         {
+            ConfigureIoc();
             ConfigureAuth(app);
         }
     }

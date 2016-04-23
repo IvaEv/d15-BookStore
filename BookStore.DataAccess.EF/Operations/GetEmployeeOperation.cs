@@ -7,7 +7,7 @@ using BookStore.DataAccess.Models;
 namespace BookStore.DataAccess.EF.Operations
 {
     [Export(typeof(IGetEmployeeOperation))]
-    public class GetEmployeeOperation : IGetEmployeeOperation
+    class GetEmployeeOperation : IGetEmployeeOperation
     {
         public async Task<GetEmployeeModel> ExecuteAsync(int id)
         {

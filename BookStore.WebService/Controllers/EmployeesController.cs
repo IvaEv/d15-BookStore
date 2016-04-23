@@ -1,17 +1,20 @@
-﻿using System;
+﻿using System.ComponentModel.Composition;
 using System.Threading.Tasks;
 using System.Web.Http;
-using BookStore.DataAccess.EF.Operations;
+using BookStore.DataAccess;
 using BookStore.DataAccess.Models;
 
 namespace BookStore.WebService.Controllers
 {
+    [Export]
     public class EmployeesController : ApiController
     {
+        [Import]
+        private IGetEmployeeOperation GetEmployeeOperation { get; set; }
+
         public async Task<GetEmployeeModel> GetAsync(int id)
         {
-            var operation = new GetEmployeeOperation();
-            var employeeModel = await operation.ExecuteAsync(id);
+            var employeeModel = await GetEmployeeOperation.ExecuteAsync(id);
             return employeeModel;
         }
     }
