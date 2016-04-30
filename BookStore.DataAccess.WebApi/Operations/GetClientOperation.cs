@@ -1,17 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using BookStore.DataAccess.Models;
 
 namespace BookStore.DataAccess.WebApi.Operations
 {
     [Export(typeof(IGetClientOperation))]
-    class GetClientOperation : IGetClientOperation
+    class GetClientOperation : WebApiClient, IGetClientOperation
     {
-        public Task<ICollection<GetClientModel>> ExecuteAsync(string clientLastName = null)
+        public async Task<ICollection<GetClientModel>> ExecuteAsync(string clientLastName = null)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return await GetAsync<List<GetClientModel>>($"clients?clientLastName={clientLastName}");
+            }
+            catch (Exception exc)
+            {
+                Debug.WriteLine(exc);
+                return null;
+            }
         }
     }
 }

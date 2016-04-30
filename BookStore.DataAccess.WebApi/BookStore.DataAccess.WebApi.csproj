@@ -63,6 +63,7 @@
     <Compile Include="Operations\SaveOrderOperation.cs" />
     <Compile Include="Operations\SearchBooksOperation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WebApiClient.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BookStore.DataAccess\BookStore.DataAccess.csproj">
