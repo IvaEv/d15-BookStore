@@ -7,6 +7,7 @@ using BookStore.DataAccess.Models;
 namespace BookStore.WebService.Controllers
 {
     [Export]
+    [PartCreationPolicy(CreationPolicy.NonShared)]
     public class EmployeesController : ApiController
     {
         [Import]
