@@ -10,8 +10,6 @@ namespace BookStore.WebService
         {
             // Web API configuration and services
             // Configure Web API to use only bearer token authentication.
-            config.Formatters.JsonFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("text/html"));
-
             config.SuppressDefaultHostAuthentication();
             config.Filters.Add(new HostAuthenticationFilter(OAuthDefaults.AuthenticationType));
 
