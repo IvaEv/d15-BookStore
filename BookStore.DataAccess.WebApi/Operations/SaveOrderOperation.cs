@@ -1,16 +1,27 @@
 ﻿using System;
 using System.ComponentModel.Composition;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using BookStore.DataAccess.Models;
 
 namespace BookStore.DataAccess.WebApi.Operations
 {
     [Export(typeof(ISaveOrderOperation))]
-    class SaveOrderOperation : ISaveOrderOperation
+    class SaveOrderOperation : WebApiClient, ISaveOrderOperation
     {
-        public Task<bool> ExecuteAsync(SaveOrderModel model)
+        public async Task<bool> ExecuteAsync(SaveOrderModel model)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var result = await PostAsync<bool>("orders", model);
+                return result;
+            }
+            catch (Exception exc)
+            {
+                Debug.WriteLine(exc);
+            }
+
+            return false;
         }
     }
 }
