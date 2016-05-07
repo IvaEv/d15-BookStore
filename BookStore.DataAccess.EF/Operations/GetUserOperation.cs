@@ -14,23 +14,23 @@ namespace BookStore.DataAccess.EF.Operations
         {
             using (var db = new BookStoreDbContext())
             {
-                User user = await db.Users
-                    .Where(u => u.Login == login)
+                ApplicationUser user = await db.Users
+                    .Where(u => u.UserName == login)
                     .FirstOrDefaultAsync();
 
                 return Convert(user);
             }
         }
 
-        private GetUserModel Convert(User user)
+        private GetUserModel Convert(ApplicationUser user)
         {
             return user == null
                 ? null 
                 : new GetUserModel
                     {
-                        Id = user.Id,
-                        Login = user.Login,
-                        Password = user.Password
+                        Id = user.Id.GetHashCode(),
+                        Login = user.UserName,
+                        Password = user.PasswordHash
                     };
         }
     }

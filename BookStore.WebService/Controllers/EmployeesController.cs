@@ -8,6 +8,7 @@ namespace BookStore.WebService.Controllers
 {
     [Export]
     [PartCreationPolicy(CreationPolicy.NonShared)]
+    [Authorize]
     public class EmployeesController : ApiController
     {
         [Import]

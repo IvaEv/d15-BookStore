@@ -1,11 +1,15 @@
 ﻿using System.Data.Entity;
 using BookStore.DataAccess.EF.Models;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace BookStore.DataAccess.EF
 {
-    public class BookStoreDbContext : DbContext
+    public class BookStoreDbContext : IdentityDbContext<ApplicationUser>
     {
-        public DbSet<User> Users { get; set; }
+        public BookStoreDbContext() :
+            base("BookStoreDbContext", throwIfV1Schema:false)
+        { }
+
         public DbSet<Branch> Branches { get; set; }
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Author> Authors { get; set; }
@@ -14,15 +18,5 @@ namespace BookStore.DataAccess.EF
         public DbSet<BookAmount> BookAmounts { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderedBook> OrderedBooks { get; set; }
-
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        {
-            modelBuilder
-                .Entity<User>()
-                .HasRequired(u => u.Employee)
-                .WithOptional(e => e.User);
-
-            base.OnModelCreating(modelBuilder);
-        }
     }
 }

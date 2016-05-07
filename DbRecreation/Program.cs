@@ -8,6 +8,8 @@ using System.Linq;
 using BookStore.BusinessLogic;
 using BookStore.DataAccess.EF;
 using BookStore.DataAccess.EF.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using Newtonsoft.Json;
 using Configuration = BookStore.DataAccess.EF.Migrations.Configuration;
 
@@ -44,6 +46,7 @@ namespace DbRecreation
                 //CreateBooksAndAuthors(db);
 
                 db.SaveChanges();
+                CreateAspNetUsers(db);
             }
         }
 
@@ -61,39 +64,25 @@ namespace DbRecreation
 
             foreach (Employee employee in employees)
             {
-                employee.User.Password = PasswordManager.CreateHash(employee.User.Password);
                 employee.Branch = GetRandomItem(db.Branches.Local);
                 db.Employees.Add(employee);
             }
         }
 
-        static void CreateBooksAndAuthors(BookStoreDbContext db)
+        static void CreateAspNetUsers(BookStoreDbContext db)
         {
-            db.BookAmounts.Add(new BookAmount
+            var jsonData = File.ReadAllText("jsonData/users.json");
+            var userModels = JsonConvert.DeserializeObject<List<UserModel>>(jsonData);
+            var userManager = new ApplicationUserManager(new UserStore<ApplicationUser>(db));
+
+            foreach (UserModel userModel in userModels)
             {
-                Amount = 10,
-                Branch = db.Employees.Local.First().Branch,
-                Book = new Book
-                {
-                    Isbn = "13-123456-12",
-                    Price = 125,
-                    PublishYear = 2015,
-                    Title = "CLR via C#",
-                    Authors = new List<Author>
-                    {
-                        new Author
-                        {
-                            LastName = "Richter",
-                            FirstName = "Jeffrey"
-                        },
-                        new Author
-                        {
-                            LastName = "Richter1",
-                            FirstName = "Jeffrey1"
-                        },
-                    }
-                }
-            });
+                var applicationUser = new ApplicationUser { UserName = userModel.Login };
+                userManager.Create(applicationUser, userModel.Password);
+                var employee = db.Employees.Find(userModel.EmployeeId);
+                employee.ApplicationUserId = applicationUser.Id;
+                db.SaveChanges();
+            }
         }
 
         private static readonly Random _rand = new Random();

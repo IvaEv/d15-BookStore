@@ -15,6 +15,8 @@ namespace BookStore.DataAccess.EF.Models
 
         public Branch Branch { get; set; }
 
-        public User User { get; set; }
+        public string ApplicationUserId { get; set; }
+
+        public ApplicationUser ApplicationUser { get; set; }
     }
 }
